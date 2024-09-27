@@ -854,6 +854,7 @@ class AttnFuncWithCP(torch.autograd.Function):
         softmax_lse = softmax_lse.to(torch.float)
         if qkv_format in ["bshd", "sbhd"]:
             seq_dim = qkv_format.index("s")
+            seq_dim = torch.tensor(seq_dim)
         for i in range(cp_size):
             if qkv_format == "bshd":
                 out_per_step[i] = out_per_step[i].view(out.shape[0], -1, *out.shape[-2:])
